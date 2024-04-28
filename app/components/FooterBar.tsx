@@ -1,3 +1,4 @@
+import { useColor } from "@/context/ThemeContext";
 import { IconBaseProps } from "react-icons";
 
 type FooterBarProps = {
@@ -7,10 +8,11 @@ type FooterBarProps = {
 }
 
 const FooterBar = ({icon, name}: FooterBarProps) => {
+  const { brandColor, setBrandColor } = useColor();
   return (
     <div className="flex flex-col items-center cursor-pointer">
-        <p className="text-[#025689] p-2 rounded-full text-xl text-center">{icon}</p>
-        <p className="text-[#025689] text-[14px]">{name}</p>
+        <p className="p-2 rounded-full text-xl text-center" style={{color: brandColor}}>{icon}</p>
+        <p className="text-[14px]" style={{color: brandColor}}>{name}</p>
     </div>
   );
 };

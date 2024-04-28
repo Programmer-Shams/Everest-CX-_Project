@@ -1,10 +1,12 @@
-import Image from "next/image";
 import HelpCenter from "./components/ HelpCenter";
+import { ColorProvider } from "@/context/ThemeContext";
 
 export default function Home() {
   return (
-    <main className="p-20">
-      <HelpCenter />
-    </main>
+    <ColorProvider>
+      <main className="p-20">
+        <HelpCenter />
+      </main>
+    </ColorProvider>
   );
 }

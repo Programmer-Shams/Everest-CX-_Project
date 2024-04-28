@@ -75,10 +75,6 @@ export const Contact = [
 ]
 
 export const FooterBarInfo = [
-    // {
-    //     icon: RiHome5Fill,
-    //     name: "Home"
-    // },
     {
         icon: HiOutlineChatBubbleBottomCenterText,
         name: "Chats"

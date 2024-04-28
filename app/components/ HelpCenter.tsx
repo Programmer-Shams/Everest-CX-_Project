@@ -15,12 +15,18 @@ import ContactBox from "./ContactBox";
 import { IconBaseProps } from "react-icons";
 import FooterBar from "./FooterBar";
 import { RiHome5Fill } from "react-icons/ri";
+import { ChromePicker, ColorResult } from "react-color";
+import { useColor } from "@/context/ThemeContext";
+
 
 const HelpCenter = () => {
   const [showPopularTopics, setShowPopularTopics] = useState(true);
   const [showRecentCases, setShowRecentCases] = useState(true);
   const [showRecentChats, setShowRecentChats] = useState(true);
   const [greeting, setGreeting] = useState("Hello there 👋 !");
+  const [showColorPicker, setShowColorPicker] = useState(false);
+
+  const { brandColor, setBrandColor } = useColor();
 
   const handleSwitchChange = (type: "popularTopics" | "recentCases" | "recentChats") => {
     switch (type) {
@@ -39,7 +45,13 @@ const HelpCenter = () => {
   };
 
   const handleGreetingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGreeting(event.target.value); // Update greeting state on user input
+    setGreeting(event.target.value);
+  };
+
+  const handleColorChange = (color: ColorResult) => {
+    if (color.hex) {
+      setBrandColor(color.hex);
+    }
   };
 
   return (
@@ -82,22 +94,32 @@ const HelpCenter = () => {
           </div>
           <div className="mt-16">
             <h1 className="text-[16px] text-gray-600">Brand Color</h1>
-            {/* <Input type="color" className="w-[4rem] mt-2" /> */}
-            <div className="flex">
-              <Input type="text" className="w-[10rem] mt-2 rounded-r-none" placeholder="Select Color" />
-              <Input type="text" className="w-[6rem] mt-2 rounded-l-none bg-blue-500 text-white border-none outline-0" value="#4GHnHB" />
+            <div className="flex items-center relative">
+              
+              <button className=" text-black border px-3 py-[5px] rounded-l mt-2" onClick={() => setShowColorPicker(!showColorPicker)}>
+                Select Color
+              </button>
+              {showColorPicker && (
+                 <div className="absolute top-20"> 
+                  <ChromePicker color={brandColor} onChange={handleColorChange} /> 
+                 </div>
+              )}
+              <Input type="text" className="w-[6rem] mt-2 rounded-l-none bg-blue-500 text-white border-none outline-0" value={brandColor} readOnly />
             </div>
             <p className="text-[13px] text-gray-500 font-bold mt-2">Enter Your brand hex color</p>
           </div>
         </div>
       </div>
+
+
+      
       {/* Right Hand Side */}
-      <div className="border border-[#025689] h-[73rem] w-[33rem] rounded-xl bg-white">
-        <div className="bg-[#025689] w-full text-white rounded-t-xl py-4 px-6 flex justify-between">
+      <div className="border h-[73rem] w-[33rem] rounded-xl bg-white" style={{borderColor: brandColor}}>
+        <div className="w-full text-white rounded-t-xl py-4 px-6 flex justify-between" style={{ backgroundColor: brandColor }} >
           <p>e</p>
           <div className="flex items-center gap-3">
             <div className="relative">
-              <p className="text-[#025689] bg-white text-[10px] rounded-full text-center w-4 px-[1px] absolute -right-1 -top-2">2</p>
+              <p className="bg-white text-[10px] rounded-full text-center w-4 px-[1px] absolute -right-1 -top-2" style={{color: brandColor}}>2</p>
               <IoNotificationsOutline className="border rounded-full p-1" size={25} />
             </div>
             <Separator orientation="vertical" />
@@ -105,26 +127,26 @@ const HelpCenter = () => {
           </div>
         </div>
         <div className="py-4 px-6">
-          <p className="text-[#025689] font-semibold text-xl mt-4">{greeting}</p>
+          <p className="font-semibold text-xl mt-4" style={{color: brandColor}}>{greeting}</p>
           <div className="flex items-center relative w-[27rem] mt-4">
             <FiSearch className="absolute left-0 top-4 cursor-pointer ml-1 text-gray-400" size={20} />
             <Input type="email" placeholder="Search knowledge base" className="w-full shadow-sm mt-2 px-8 bg-[#F5F5F5]" />
           </div>
 
             <div className="mt-10">
-              <h1 className="text-[#025689] text-lg font-semibold">Popular Topics</h1>
+              <h1 className="text-lg font-semibold" style={{color: brandColor}}>Popular Topics</h1>
               {showPopularTopics && (
               <div className="flex items-center gap-2">
                 {popularTopicsInfo.map((topic, index) => (
                   <div key={index} className="flex items-center gap-2 mt-4 border w-fit p-[1px] rounded-full">
                     <img src={topic.imgUrl} alt={topic.title} className="w-8 h-8 rounded-full" />
-                    <p className="text-[11px] font-semibold text-[#025689] pr-2">{topic.title}</p>
+                    <p className="text-[11px] font-semibold  pr-2" style={{color: brandColor}}>{topic.title}</p>
                   </div>
                 ))}
               </div>
               )}
                {!showPopularTopics && (
-               <div className="mt-14 text-[#025689] text-lg font-semibold text-center border rounded-lg py-8">
+               <div className="mt-14 text-lg font-semibold text-center border rounded-lg py-8" style={{color: brandColor}} >
                  No Popular Topics to display
                </div>
               )}
@@ -132,9 +154,9 @@ const HelpCenter = () => {
 
 
             <div className="mt-14">
-              <div className="flex justify-between text-[#025689] font-bold text-lg">
+              <div className="flex justify-between font-bold text-lg" style={{color: brandColor}}>
                 <h1>Recent Cases</h1>
-                <p className="border-b-2 border-[#025689] text-[15px] cursor-pointer">View All</p>
+                <p className="border-b-2 text-[15px] cursor-pointer" style={{borderColor: brandColor}}>View All</p>
               </div>
               {showRecentCases && (
               <div className="mt-3 flex flex-col items-center gap-3">
@@ -144,7 +166,7 @@ const HelpCenter = () => {
               </div>
                )}
                {!showRecentCases && (
-               <div className="mt-14 text-[#025689] text-lg font-semibold text-center border rounded-lg py-8">
+               <div className="mt-14 text-lg font-semibold text-center border rounded-lg py-8" style={{color: brandColor}}>
                  No Recent Cases to display
                </div>
               )}
@@ -152,9 +174,9 @@ const HelpCenter = () => {
 
           
             <div className="mt-14">
-              <div className="flex justify-between text-[#025689] text-lg font-bold">
+              <div className="flex justify-between text-lg font-bold" style={{color: brandColor}}>
                 <h1>Recent Chats</h1>
-                <p className="border-b-2 border-[#025689] text-[15px] cursor-pointer">View All</p>
+                <p className="border-b-2 text-[15px] cursor-pointer" style={{borderColor: brandColor}}>View All</p>
               </div>
               {showRecentChats && (
               <div className="mt-3 flex flex-col items-center gap-3">
@@ -164,14 +186,14 @@ const HelpCenter = () => {
               </div>
                )}
                {!showRecentChats && (
-               <div className="mt-14 text-[#025689] text-lg font-semibold text-center border rounded-lg py-8">
+               <div className="mt-14 text-lg font-semibold text-center border rounded-lg py-8" style={{color: brandColor}}>
                  No Recent Chats to display
                </div>
               )}
             </div>
 
           <div className="mt-14">
-            <h1 className="text-[#025689] font-bold text-lg">Need more help ?</h1>
+            <h1 className="font-bold text-lg" style={{color: brandColor}} >Need more help ?</h1>
             <div className="flex gap-3 mt-3">
               {Contact.map((helpCenter, index) => (
                 <ContactBox key={index} icon={helpCenter.icon({} as IconBaseProps)} text={helpCenter.text} />
@@ -182,8 +204,8 @@ const HelpCenter = () => {
         <div className="flex items-center justify-between mt-10 border-t py-2 px-5">
           <div>
             <div className="flex items-center flex-col cursor-pointer">
-              <p className="text-white p-2 rounded-full text-xl text-center bg-[#025689]"><RiHome5Fill /></p>
-              <p className="text-[#025689] text-[14px]">Home</p>
+              <p className="text-white p-2 rounded-full text-xl text-center" style={{backgroundColor: brandColor}}><RiHome5Fill /></p>
+              <p className="text-[14px]" style={{color: brandColor}}>Home</p>
             </div>
           </div>
           {FooterBarInfo.map((footer, index) => (

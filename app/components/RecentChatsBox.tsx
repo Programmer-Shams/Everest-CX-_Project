@@ -1,4 +1,3 @@
-import { RxDotFilled } from "react-icons/rx";
 import { IoMdTime } from "react-icons/io";
 type RecentChatsBox = {
     name: string;

@@ -114,7 +114,7 @@ const HelpCenter = () => {
 
       
       {/* Right Hand Side */}
-      <div className="border h-[73rem] w-[33rem] rounded-xl bg-white" style={{borderColor: brandColor}}>
+      <div className="border h-[73rem] rounded-xl bg-white" style={{borderColor: brandColor}}>
         <div className="w-full text-white rounded-t-xl py-4 px-6 flex justify-between" style={{ backgroundColor: brandColor }} >
           <p>e</p>
           <div className="flex items-center gap-3">
@@ -128,7 +128,7 @@ const HelpCenter = () => {
         </div>
         <div className="py-4 px-6">
           <p className="font-semibold text-xl mt-4" style={{color: brandColor}}>{greeting}</p>
-          <div className="flex items-center relative w-[27rem] mt-4">
+          <div className="flex items-center relative  mt-4">
             <FiSearch className="absolute left-0 top-4 cursor-pointer ml-1 text-gray-400" size={20} />
             <Input type="email" placeholder="Search knowledge base" className="w-full shadow-sm mt-2 px-8 bg-[#F5F5F5]" />
           </div>

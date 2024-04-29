@@ -84,10 +84,11 @@
     width: fit-content;
     justify-content: center;
     align-items: center;
+    gap: 5rem;
   }
   .mobilescreen {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
   }
 }
   @media (max-width: 796px) {

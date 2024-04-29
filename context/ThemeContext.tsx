@@ -1,5 +1,5 @@
-"use client";
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+"use client"
+import React, { createContext, useContext, useState } from 'react';
 
 type ColorContextType = {
   brandColor: string;
@@ -9,7 +9,13 @@ type ColorContextType = {
 const ColorContext = createContext<ColorContextType | undefined>(undefined);
 
 export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [brandColor, setBrandColor] = useState('#025689');
+  const [brandColor, setBrandColorState] = useState('#025689');
+
+  const setBrandColor = (color: string) => {
+    // If selected color is white (#ffffff), change it to black (#000000)
+    const updatedColor = color.toLowerCase() === '#ffffff' ? '#000000' : color;
+    setBrandColorState(updatedColor);
+  };
 
   return (
     <ColorContext.Provider value={{ brandColor, setBrandColor }}>

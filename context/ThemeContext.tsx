@@ -12,7 +12,6 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [brandColor, setBrandColorState] = useState('#025689');
 
   const setBrandColor = (color: string) => {
-    // If selected color is white (#ffffff), change it to black (#000000)
     const updatedColor = color.toLowerCase() === '#ffffff' ? '#000000' : color;
     setBrandColorState(updatedColor);
   };

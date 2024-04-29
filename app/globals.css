@@ -77,3 +77,25 @@
 .bold {
   font-weight:900;
 }
+  @media screen and (max-width: 1227px) {
+    .responsive{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobilescreen {
+    display: flex;
+    justify-content: center;
+  }
+}
+  @media (max-width: 796px) {
+    .mobilescreen{
+      padding: 5px;
+  }
+  
+}
+@media screen {
+  
+}

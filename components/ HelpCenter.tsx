@@ -55,7 +55,7 @@ const HelpCenter = () => {
   };
 
   return (
-    <section className="border p-8 bg-[#F6F7F9] rounded-xl flex gap-[20rem]">
+    <section className="border-4 w-full p-8 bg-[#F6F7F9] rounded-xl flex flex-row lg:gap-[8rem] responsive">
       {/* Left Hand Side */}
       <div>
         <h1 className="text-xl">Tailored for your Brand</h1>
